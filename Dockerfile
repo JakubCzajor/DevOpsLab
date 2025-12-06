@@ -3,7 +3,7 @@ FROM node:18-alpine
 WORKDIR /app
 
 COPY backend/package.json ./backend/
-RUN npm install
+RUN cd backend && npm install
 
 COPY backend ./backend
 
