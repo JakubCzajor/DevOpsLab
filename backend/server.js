@@ -1,29 +1,13 @@
 import express from "express";
-import path from "path";
-import { fileURLToPath } from "url";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import cors from "cors";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Serve frontend static files
-app.use(express.static(path.join(__dirname, "../frontend")));
+app.use(cors());
 
-// Backend API
 app.get("/message", (req, res) => {
-  res.send("Hello from backend inside a single container!");
-});
-
-// Fallback: serve index.html on root or unknown routes
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/index.html"));
-});
-
-// Optional: fallback for SPA routes
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/index.html"));
+  res.json({ message: "Hello from backend inside a multi container!" });
 });
 
 app.listen(PORT, () => {
